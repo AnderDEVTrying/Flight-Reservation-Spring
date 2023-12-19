@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public record ReservationResponseDTO(Long id, String first_name, String last_name, String document
         , Destination destination, LocalDateTime departureTime, LocalDateTime arrivalTime) {
     public ReservationResponseDTO(Reservation reservation){
-        this(reservation.getId(), reservation.getFirts_name(), reservation.getLast_name()
+        this(reservation.getId(), reservation.getFirst_name(), reservation.getLast_name()
                 , reservation.getDocument(),reservation.getDestination()
                 , reservation.getDepartureTime(), reservation.getArrivalTime());
     }
