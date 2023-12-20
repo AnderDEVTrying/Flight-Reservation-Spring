@@ -1,16 +1,32 @@
 package com.ReservaVoos.Services;
 
-import com.ReservaVoos.DTORequest.ReservationRequestDTO;
+import com.ReservaVoos.Domain.Destination;
+import com.ReservaVoos.Domain.Reservation;
 import com.ReservaVoos.Repository.ReservationRepository;
-import com.ReservaVoos.Util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class ReservationServices {
+    @Autowired
     private ReservationRepository repository;
-    private DateUtil date;
-    public ReservationServices(ReservationRepository repository){
-        this.repository = repository;
+
+    public void setArrivalDate( Reservation reservation ){
+        if (reservation.getDestination() == Destination.Beira){
+            LocalDate arrivalDate = reservation.getDepartureDate().plusDays(1);
+            reservation.setArrivalDate(arrivalDate);
+        }
+        if (reservation.getDestination() == Destination.Tete){
+            LocalDate arrivalDate = reservation.getDepartureDate().plusDays(1);
+            reservation.setArrivalDate(arrivalDate);
+        }
+        if (reservation.getDestination() == Destination.Nampula){
+            LocalDate arrivalDate = reservation.getDepartureDate().plusDays(2);
+            reservation.setArrivalDate(arrivalDate);
+        }
+
     }
 
 }

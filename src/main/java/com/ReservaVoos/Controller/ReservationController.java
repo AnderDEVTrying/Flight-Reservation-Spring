@@ -4,6 +4,7 @@ import com.ReservaVoos.DTORequest.ReservationRequestDTO;
 import com.ReservaVoos.DTORequest.ReservationResponseDTO;
 import com.ReservaVoos.Domain.Reservation;
 import com.ReservaVoos.Repository.ReservationRepository;
+import com.ReservaVoos.Services.ReservationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class ReservationController {
     @Autowired
     private ReservationRepository repository;
+    @Autowired
+    private ReservationServices reservationServices;
     @GetMapping
     public List<ReservationResponseDTO> getAll(){
         List<ReservationResponseDTO> reservationlist = repository.findAll().stream().map(ReservationResponseDTO::new)
@@ -21,9 +24,10 @@ public class ReservationController {
         return reservationlist;
     }
     @PostMapping
-    public void saveReservationData(@RequestBody ReservationRequestDTO data){
+    public ReservationRequestDTO saveReservationData(@RequestBody ReservationRequestDTO data){
         Reservation reservationData = new Reservation(data);
+        reservationServices.setArrivalDate(reservationData);
         repository.save(reservationData);
-        return;
+        return data;
     }
 }
