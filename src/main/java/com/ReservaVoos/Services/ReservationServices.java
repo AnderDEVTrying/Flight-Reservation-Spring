@@ -28,5 +28,10 @@ public class ReservationServices {
         }
 
     }
+    public void validateDepartureDate(Reservation reservation)throws Exception{
+        if(reservation.getDepartureDate().isBefore(LocalDate.now())){
+            throw new Exception("Departure date is invalid");
+        }
+    }
 
 }

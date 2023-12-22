@@ -24,8 +24,9 @@ public class ReservationController {
         return reservationlist;
     }
     @PostMapping
-    public ReservationRequestDTO saveReservationData(@RequestBody ReservationRequestDTO data){
+    public ReservationRequestDTO saveReservationData(@RequestBody ReservationRequestDTO data) throws Exception {
         Reservation reservationData = new Reservation(data);
+        reservationServices.validateDepartureDate(reservationData);
         reservationServices.setArrivalDate(reservationData);
         repository.save(reservationData);
         return data;
