@@ -1,5 +1,4 @@
 # Flight-Reservation-Spring
-# Flight Reservation System
 
 This project is a simple flight reservation system built using Java with Spring Boot.
 
